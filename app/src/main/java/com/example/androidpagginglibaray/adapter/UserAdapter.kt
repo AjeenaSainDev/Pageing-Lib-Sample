@@ -1,6 +1,7 @@
 package com.example.androidpagginglibaray.adapter
 
 import android.annotation.SuppressLint
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -19,8 +20,10 @@ import kotlinx.android.synthetic.main.paged_list_item.view.*
  */
 class UserAdapter :PagedListAdapter<User, UserAdapter.UserViewHolder>(USER_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.paged_list_item, parent, false)
+        return UserViewHolder(view)
+          }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
