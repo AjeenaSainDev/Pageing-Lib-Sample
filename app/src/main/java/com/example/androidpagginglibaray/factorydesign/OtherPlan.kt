@@ -7,7 +7,9 @@ package com.example.androidpagginglibaray.factorydesign
  *
  */
 class OtherPlan(override var rate: Double) :Plan() {
-
+    override var test: Double
+        get() = super.test
+        set(value) {}
     override fun getRateValue(): Double {
         rate = 40.0
         return rate

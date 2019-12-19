@@ -10,6 +10,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidpagginglibaray.adapter.UserAdapter
+import com.example.androidpagginglibaray.factorydesign.FactoryClass
 import com.example.androidpagginglibaray.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_main_layout.*
@@ -19,15 +20,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_main_layout)
         setupNavigation()
-       /* val adapter = UserAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val itemViewModel = ViewModelProviders.of(this)
-            .get(UserViewModel::class.java)
-        itemViewModel.userPagedList.observe(this, Observer {
-            adapter.submitList(it)
-        })
-        recyclerView.adapter = adapter*/
+        var factoryClass = FactoryClass()
+        var plan = factoryClass.getRate("DOMESTICPLAN")
+
+        plan.calculateBill(5)
+        /* val adapter = UserAdapter()
+         recyclerView.layoutManager = LinearLayoutManager(this)
+         val itemViewModel = ViewModelProviders.of(this)
+             .get(UserViewModel::class.java)
+         itemViewModel.userPagedList.observe(this, Observer {
+             adapter.submitList(it)
+         })
+         recyclerView.adapter = adapter*/
     }
+
     private fun setupNavigation() {
         val navController = findNavController(this, R.id.nav_host_fragment)
 
@@ -48,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp()
     }
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)

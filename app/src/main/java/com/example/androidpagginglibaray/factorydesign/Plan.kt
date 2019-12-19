@@ -8,9 +8,12 @@ package com.example.androidpagginglibaray.factorydesign
  */
 abstract class Plan {
     abstract  var  rate : Double
+    open var test : Double = 0.0
     abstract fun getRateValue() : Double
     fun calculateBill(units: Int) {
-        System.out.println("units"+units * rate)}
+        System.out.println("units"+units * rate )
+        System.out.println("test"+ test)
+    }
 
      /* var  rate : Double = 0.0
     abstract fun getRate() : Double

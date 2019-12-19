@@ -7,7 +7,9 @@ package com.example.androidpagginglibaray.factorydesign
  *
  */
 class DomesticPlan(override var rate: Double) : Plan() {
-
+    override var test: Double
+        get() = super.test
+        set(value) {}
     override fun getRateValue(): Double {
         rate = 140.0
         return rate    }
