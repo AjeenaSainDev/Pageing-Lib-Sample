@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_grapg"
+    app:startDestination="@id/productListDestination"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/productListDestination"
+        android:name="com.example.androidpagginglibaray.fragment.ProductsListFragment"
+        android:label="product_list"
+        tools:layout="@layout/product_list">
+        <action
+            android:id="@+id/action_list_details"
+            app:destination="@id/productDetailsDestination"/>
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsDestination"
+        android:name="com.example.androidpagginglibaray.fragment.ProductDescription"
+        android:label="product_details"
+        tools:layout="@layout/product_description" >
+        <action android:id="@+id/note_action"
+            app:destination="@+id/noteList"></action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteList"
+        android:name="com.example.androidpagginglibaray.fragment.NoteListFragment"
+        android:label="note_list"
+        tools:layout="@layout/note_list" />
+</navigation>
