@@ -5,6 +5,7 @@ import com.example.androidpagginglibaray.utils.Constant
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -24,6 +25,7 @@ import javax.inject.Singleton
  * ajeena.sainudeen@claysol.com
  *
  */
+@Module
 class ApiModule {
     companion object {
         private const val NAME_BASE_URL = "NAME_BASE_URL"

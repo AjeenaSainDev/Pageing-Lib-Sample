@@ -11,11 +11,20 @@ import androidx.navigation.ui.NavigationUI.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidpagginglibaray.adapter.UserAdapter
 import com.example.androidpagginglibaray.factorydesign.FactoryClass
+import com.example.androidpagginglibaray.model.UserResponse
+import com.example.androidpagginglibaray.repository.ProductRepository
 import com.example.androidpagginglibaray.viewmodel.UserViewModel
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_main_layout.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var productRepository : ProductRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_main_layout)
@@ -24,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         var plan = factoryClass.getRate("DOMESTICPLAN")
 
         plan.calculateBill(5)
+        (application as PagingApp).appComponent.inject(this)
+        getUser()
+
         /* val adapter = UserAdapter()
          recyclerView.layoutManager = LinearLayoutManager(this)
          val itemViewModel = ViewModelProviders.of(this)
@@ -62,4 +74,12 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+    fun getUser (){
+      val observable : Observable<UserResponse> =  productRepository.getRemoteSource().getUserDate(0).flatMap { t: UserResponse ->}
+          observable
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+
+
+            }
 }

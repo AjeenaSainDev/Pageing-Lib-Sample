@@ -10,6 +10,6 @@ class Constant {
     companion object {
         const val PROTOCOL = "https"
         const val LANGUAGE = "en"
-        const val BASE_URL = "wikipedia.org/w/api.php"
+        const val BASE_URL = "https://reqres.in/api/"
     }
 }
