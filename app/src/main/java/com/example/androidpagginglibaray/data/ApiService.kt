@@ -1,6 +1,8 @@
 package com.example.androidpagginglibaray.data
 
+import androidx.lifecycle.Observer
 import com.example.androidpagginglibaray.model.UserResponse
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,6 +15,6 @@ import retrofit2.http.Query
  */
 interface ApiService {
     @GET("users")
-    fun getUsers(@Query("page") page: Int): Call<UserResponse>
+    fun getUsers(@Query("page") page: Int): Observable<UserResponse>
 
 }

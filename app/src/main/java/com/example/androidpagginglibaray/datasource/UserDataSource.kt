@@ -22,7 +22,7 @@ class UserDataSource : PageKeyedDataSource<Int, User>() {
     ) {
         val service = ApiServiceBuilder.buildService(ApiService::class.java)
         val call = service.getUsers(FIRST_PAGE)
-        call.enqueue(object : Callback<UserResponse>{
+       /* call.enqueue(object : Callback<UserResponse>{
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -38,13 +38,13 @@ class UserDataSource : PageKeyedDataSource<Int, User>() {
 
             }
 
-        })
+        })*/
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         val service = ApiServiceBuilder.buildService(ApiService::class.java)
         val call = service.getUsers(params.key)
-        call.enqueue(object : Callback<UserResponse> {
+       /* call.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()!!
@@ -57,14 +57,14 @@ class UserDataSource : PageKeyedDataSource<Int, User>() {
             }
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
             }
-        })
+        })*/
 
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         val service = ApiServiceBuilder.buildService(ApiService::class.java)
         val call = service.getUsers(params.key)
-        call.enqueue(object : Callback<UserResponse> {
+       /* call.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()!!
@@ -77,7 +77,7 @@ class UserDataSource : PageKeyedDataSource<Int, User>() {
             }
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
             }
-        })
+        })*/
     }
     companion object{
         const val PAGE_SIZE = 6

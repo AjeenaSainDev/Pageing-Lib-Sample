@@ -12,7 +12,7 @@ class CommercialPlan(override var rate: Double) : Plan() {
         set(value) {}
 
     override fun getRateValue(): Double {
-        rate = 50.0
+        rate = 350.0
         return rate    }
 
 
