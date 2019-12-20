@@ -13,8 +13,8 @@ import retrofit2.Call
  *
  */
 class RemoteDataSource(apiService: ApiService) : RemoteData {
-    lateinit var apiService : ApiService
+     var mapiService = apiService
     override fun getUserDate(page: Int): Observable<UserResponse> {
-        return apiService.getUsers(page)
+        return mapiService.getUsers(page)
     }
 }
