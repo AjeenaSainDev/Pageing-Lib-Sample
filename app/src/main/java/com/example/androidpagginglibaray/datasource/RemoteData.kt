@@ -14,4 +14,5 @@ import retrofit2.Call
  */
 interface RemoteData {
     fun getUserDate (page : Int): Observable<UserResponse>
+    fun getUserCall  (page : Int) : Call<UserResponse>
 }

@@ -15,7 +15,9 @@ import com.example.androidpagginglibaray.model.UserResponse
 import com.example.androidpagginglibaray.repository.ProductRepository
 import com.example.androidpagginglibaray.viewmodel.UserViewModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_main_layout.*
@@ -23,27 +25,40 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var productRepository : ProductRepository
+    lateinit var productRepository: ProductRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.navigation_main_layout)
-        setupNavigation()
+        setContentView(R.layout.activity_main)
+        //setupNavigation()
+        (application as PagingApp).appComponent.inject(this)
         var factoryClass = FactoryClass()
         var plan = factoryClass.getRate("DOMESTICPLAN")
 
         plan.calculateBill(5)
-        (application as PagingApp).appComponent.inject(this)
-        getUser()
 
-        /* val adapter = UserAdapter()
+       // getUser()
+
+         val adapter = UserAdapter()
          recyclerView.layoutManager = LinearLayoutManager(this)
          val itemViewModel = ViewModelProviders.of(this)
              .get(UserViewModel::class.java)
          itemViewModel.userPagedList.observe(this, Observer {
              adapter.submitList(it)
          })
-         recyclerView.adapter = adapter*/
+         recyclerView.adapter = adapter
+    }
+
+    private fun getUser() {
+       val observable = productRepository.getRemoteSource().getUserDate(1)
+        observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(Consumer { userresponse ->
+                System.out.println("page_rx"+ userresponse.users!!.get(2).avatar)
+            })
+
+
+
     }
 
     private fun setupNavigation() {
@@ -63,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(navigationView, navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+   /* override fun onSupportNavigateUp(): Boolean {
         return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp()
     }
 
@@ -73,13 +88,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
-    }
-    fun getUser (){
-      val observable : Observable<UserResponse> =  productRepository.getRemoteSource().getUserDate(0).flatMap { t: UserResponse ->}
-          observable
-              .subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
+    }*/
 
 
-            }
+
 }

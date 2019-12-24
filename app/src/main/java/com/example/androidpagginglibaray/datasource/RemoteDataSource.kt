@@ -17,4 +17,7 @@ class RemoteDataSource(apiService: ApiService) : RemoteData {
     override fun getUserDate(page: Int): Observable<UserResponse> {
         return mapiService.getUsers(page)
     }
+
+    override fun getUserCall(page: Int): Call<UserResponse> {
+        return mapiService.getUsersCall(page)    }
 }
